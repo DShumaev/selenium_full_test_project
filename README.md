@@ -1,1 +1,1 @@
-# selenium_full_test_project
+Full test project using selenium webdriver
