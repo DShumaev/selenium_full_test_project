@@ -1,6 +1,10 @@
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
 import math
+from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from .locators import BasePageLocators
 
 
 class BasePage(object):
@@ -13,15 +17,36 @@ class BasePage(object):
     def open(self):
         self.browser.get(self.url)
 
-    def is_element_present(self, how, what):
+    def is_element_present(self, selector_type, selector_value):
         try:
-            self.browser.find_element(how, what)
+            self.browser.find_element(selector_type, selector_value)
         except (NoSuchElementException):
             return False
         return True
 
-    def get_element_text(self, selector, selector_value):
-        return self.browser.find_element(selector, selector_value).text
+    def get_element_text(self, selector_type, selector_value):
+        return self.browser.find_element(selector_type, selector_value).text
+
+    def is_not_element_present(self, selector_type, selector_value, timeout=4):
+        try:
+            WebDriverWait(self.browser, timeout).until(EC.presence_of_element_located((selector_type, selector_value)))
+        except TimeoutException:
+            return True
+        return False
+
+    def is_disappeared(self, selector_type, selector_value, timeout=4):
+        try:
+            WebDriverWait(self.browser, timeout).until_not(EC.presence_of_element_located((selector_type, selector_value)))
+        except TimeoutException:
+            return False
+        return True
+
+    def go_to_login_page(self):
+        login_link = self.browser.find_element(*BasePageLocators.LOGIN_LINK)
+        login_link.click()
+
+    def should_be_login_link(self):
+        assert self.is_element_present(*BasePageLocators.LOGIN_LINK), "Login link is not presented"
 
     def solve_quiz_and_get_code(self):
         alert = self.browser.switch_to.alert

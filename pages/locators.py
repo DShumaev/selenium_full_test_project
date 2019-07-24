@@ -1,8 +1,9 @@
 from selenium.webdriver.common.by import By
 
 
-class MainPageLocators(object):
+class BasePageLocators(object):
     LOGIN_LINK = (By.CSS_SELECTOR, '#login_link')
+    LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link_inc")
 
 class LoginPageLocators(object):
 
@@ -15,12 +16,14 @@ class LoginPageLocators(object):
     REG_BTN = (By.CSS_SELECTOR, 'button.btn.btn-lg.btn-primary[name="registration_submit"]')
 
 class ProductPageLocators(object):
-    NOTICE_NAME_PRODUCT = (By.CSS_SELECTOR, 'div#messages>div:nth-child(1)>div.alertinner>strong')
-    NOTICE_STATUS_BASKET = (By.CSS_SELECTOR, 'div#messages>div:nth-child(2)>div.alertinner>strong')
-    NOTICE_PRICE_PRODUCT = (By.CSS_SELECTOR, 'div#messages>div:nth-child(3)>div.alertinner strong')
+    MESSAGE_NAME_PRODUCT = (By.CSS_SELECTOR, 'div#messages>div:nth-child(1)>div.alertinner>strong')
+    MESSAGE_STATUS_BASKET = (By.CSS_SELECTOR, 'div#messages>div:nth-child(2)>div.alertinner>strong')
+    MESSAGE_PRICE_PRODUCT = (By.CSS_SELECTOR, 'div#messages>div:nth-child(3)>div.alertinner strong')
     NAME_PRODUCT = (By.CSS_SELECTOR, 'div.row>div>h1')
     PRICE_PRODUCT = (By.CSS_SELECTOR, 'div.row>div>p.price_color')
     ADDTO_BTN = (By.CSS_SELECTOR, 'button.btn-add-to-basket')
+    MESSAGE_SUCCESS = (By.CSS_SELECTOR, 'div#messages>div.alert-success:nth-child(1)')
+
 
 
 
