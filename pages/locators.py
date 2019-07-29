@@ -1,12 +1,12 @@
 from selenium.webdriver.common.by import By
 
-
 class BasePageLocators(object):
     LOGIN_LINK = (By.CSS_SELECTOR, '#login_link')
-    LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link_inc")
+    LOGIN_LINK_INVALID = (By.CSS_SELECTOR, '#login_link_inc')
+    CART_BTN = (By.CSS_SELECTOR, 'span.btn-group>a.btn.btn-default')
 
 class LoginPageLocators(object):
-
+    LOGIN_EMAIL_FIELD = (By.CSS_SELECTOR, '#id_login-username')
     LOGIN_PSWD_FIELD = (By.CSS_SELECTOR, '#id_login-password')
     REG_EMAIL_FIELD = (By.CSS_SELECTOR, '#id_registration-email')
     REG_PSWD_FIELD = (By.CSS_SELECTOR, '#id_registration-password1')
@@ -23,6 +23,12 @@ class ProductPageLocators(object):
     PRICE_PRODUCT = (By.CSS_SELECTOR, 'div.row>div>p.price_color')
     ADDTO_BTN = (By.CSS_SELECTOR, 'button.btn-add-to-basket')
     MESSAGE_SUCCESS = (By.CSS_SELECTOR, 'div#messages>div.alert-success:nth-child(1)')
+
+class CartPageLocators(object):
+    MESSAGE_CART_EMPTY = (By.CSS_SELECTOR, 'div#messages>div.alert-info div.alertinner>p')
+    PRODUCT_OBJECT_IN_CART = (By.CSS_SELECTOR, 'div.basket-items')
+    STRING_CART_EMPTY = (By.CSS_SELECTOR, 'div#content_inner>p')
+
 
 
 

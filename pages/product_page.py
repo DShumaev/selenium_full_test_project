@@ -6,7 +6,7 @@ class ProductPage(BasePage):
 
     def add_to_cart(self):
         self.should_be_add_to_cart_button()
-        self.go_to_cart_page()
+        self.add_to_cart_click()
         self.solve_quiz_and_get_code()
 
     def check_product_description_in_notice(self):
@@ -25,7 +25,7 @@ class ProductPage(BasePage):
         else:
             assert False, "Name of added product not match to real name"
 
-    def go_to_cart_page(self):
+    def add_to_cart_click(self):
         login_link = self.browser.find_element(*ProductPageLocators.ADDTO_BTN)
         login_link.click()
 

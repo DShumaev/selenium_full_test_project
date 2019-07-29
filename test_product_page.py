@@ -1,4 +1,5 @@
 from .pages.product_page import ProductPage
+from .pages.cart_page import CartPage
 import pytest
 
 
@@ -37,3 +38,17 @@ def test_guest_can_go_to_login_page_from_product_page(browser):
     product_page = ProductPage(browser, link)
     product_page.open()
     product_page.go_to_login_page()
+
+def test_guest_cant_see_product_in_cart_opened_from_product_page(browser):
+    link = "http://selenium1py.pythonanywhere.com"
+    product_page = ProductPage(browser, link)
+    product_page.open()
+    print("open start page")
+    product_page.go_to_cart_page()
+    print("open cart page")
+    cart_page = CartPage(browser, browser.current_url)
+    print("load cartpage object")
+    cart_page.text_that_cart_is_empty_present()
+    cart_page.cart_is_empty()
+    
+
