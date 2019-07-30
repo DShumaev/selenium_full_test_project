@@ -1,10 +1,12 @@
+import math
+
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+
 from .locators import BasePageLocators
-import math
 
 
 class BasePage(object):
@@ -29,14 +31,16 @@ class BasePage(object):
 
     def is_not_element_present(self, selector_type, selector_value, timeout=4):
         try:
-            WebDriverWait(self.browser, timeout).until(EC.presence_of_element_located((selector_type, selector_value)))
+            WebDriverWait(self.browser, timeout). \
+                until(EC.presence_of_element_located((selector_type, selector_value)))
         except TimeoutException:
             return True
         return False
 
     def is_disappeared(self, selector_type, selector_value, timeout=4):
         try:
-            WebDriverWait(self.browser, timeout).until_not(EC.presence_of_element_located((selector_type, selector_value)))
+            WebDriverWait(self.browser, timeout). \
+                until_not(EC.presence_of_element_located((selector_type, selector_value)))
         except TimeoutException:
             return False
         return True
@@ -46,7 +50,8 @@ class BasePage(object):
         login_link.click()
 
     def should_be_login_link(self):
-        assert self.is_element_present(*BasePageLocators.LOGIN_LINK), "Login link is not presented"
+        assert self.is_element_present(*BasePageLocators.LOGIN_LINK), \
+            "Login link is not presented"
 
     def solve_quiz_and_get_code(self):
         alert = self.browser.switch_to.alert
@@ -66,7 +71,8 @@ class BasePage(object):
         cart_button.click()
 
     def should_be_authorized_user(self):
-        assert self.is_element_present(*BasePageLocators.USER_ICON), "User icon is not presented, probably unauthorised user"
+        assert self.is_element_present(*BasePageLocators.USER_ICON), \
+            "User icon is not presented, probably unauthorised user"
 
     def fill_the_field(self, selector_type, selector_value, value):
         field = self.browser.find_element(selector_type, selector_value)

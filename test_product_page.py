@@ -1,12 +1,15 @@
-from .pages.product_page import ProductPage
-from .pages.cart_page import CartPage
-from .pages.login_page import LoginPage
-import pytest
 import random
 from time import time
 
+import pytest
+
+from .pages.product_page import ProductPage
+from .pages.cart_page import CartPage
+from .pages.login_page import LoginPage
+
 
 link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer0"
+
 
 #@pytest.mark.parametrize('link', ["http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer0",
 #                                  "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer1",
@@ -17,7 +20,10 @@ link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?prom
 #                                  "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer6",
 #                                  "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer7",
 #                                  "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer8",
-#                                 "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer9"])
+#                                  "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer9"])
+
+
+@pytest.mark.need_review
 def test_guest_can_add_product_to_cart(browser):
     product_page = ProductPage(browser, link)
     product_page.open()
@@ -25,10 +31,12 @@ def test_guest_can_add_product_to_cart(browser):
     product_page.check_product_description_in_notice()
     product_page.check_product_price_in_notice()
 
+
 def test_guest_cant_see_success_message(browser):
     product_page = ProductPage(browser, link)
     product_page.open()
     product_page.should_nod_be_success_message()
+
 
 def test_guest_should_see_login_link_on_product_page(browser):
     link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
@@ -36,12 +44,16 @@ def test_guest_should_see_login_link_on_product_page(browser):
     product_page.open()
     product_page.should_be_login_link()
 
+
+@pytest.mark.need_review
 def test_guest_can_go_to_login_page_from_product_page(browser):
     link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
     product_page = ProductPage(browser, link)
     product_page.open()
     product_page.go_to_login_page()
 
+
+@pytest.mark.need_review
 def test_guest_cant_see_product_in_cart_opened_from_product_page(browser):
     link = "http://selenium1py.pythonanywhere.com"
     product_page = ProductPage(browser, link)
@@ -53,7 +65,7 @@ def test_guest_cant_see_product_in_cart_opened_from_product_page(browser):
     print("load cartpage object")
     cart_page.text_that_cart_is_empty_present()
     cart_page.cart_is_empty()
-    
+
 
 class TestUserAddToCartFromProductPage:
    
@@ -72,6 +84,7 @@ class TestUserAddToCartFromProductPage:
         self.product_page.open()
         self.product_page.should_nod_be_success_message()
 
+    @pytest.mark.need_review
     def test_user_can_add_product_to_cart(self, browser):
         self.product_page = ProductPage(browser, link)
         self.product_page.open()

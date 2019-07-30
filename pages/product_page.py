@@ -30,12 +30,15 @@ class ProductPage(BasePage):
         login_link.click()
 
     def should_be_add_to_cart_button(self):
-        assert self.is_element_present(*ProductPageLocators.ADDTO_BTN), "Add to cart button is not present"
+        assert self.is_element_present(*ProductPageLocators.ADDTO_BTN), \
+            "Add to cart button is not present"
 
     def should_nod_be_success_message(self):
-        assert self.is_not_element_present(*ProductPageLocators.MESSAGE_SUCCESS), "Success message is presented, but should not be"
+        assert self.is_not_element_present(*ProductPageLocators.MESSAGE_SUCCESS), \
+            "Success message is presented, but should not be"
 
     def should_success_message_disappeared(self):
-        assert self.is_disappeared(*ProductPageLocators.MESSAGE_SUCCESS), "Success message is not disappeared"
+        assert self.is_disappeared(*ProductPageLocators.MESSAGE_SUCCESS), \
+            "Success message is not disappeared"
 
   
