@@ -4,6 +4,7 @@ class BasePageLocators(object):
     LOGIN_LINK = (By.CSS_SELECTOR, '#login_link')
     LOGIN_LINK_INVALID = (By.CSS_SELECTOR, '#login_link_inc')
     CART_BTN = (By.CSS_SELECTOR, 'span.btn-group>a.btn.btn-default')
+    USER_ICON = (By.CSS_SELECTOR, '.icon-user')
 
 class LoginPageLocators(object):
     LOGIN_EMAIL_FIELD = (By.CSS_SELECTOR, '#id_login-username')

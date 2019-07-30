@@ -1,10 +1,10 @@
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
-import math
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from .locators import BasePageLocators
+import math
 
 
 class BasePage(object):
@@ -65,6 +65,16 @@ class BasePage(object):
         cart_button = self.browser.find_element(*BasePageLocators.CART_BTN)
         cart_button.click()
 
+    def should_be_authorized_user(self):
+        assert self.is_element_present(*BasePageLocators.USER_ICON), "User icon is not presented, probably unauthorised user"
+
+    def fill_the_field(self, selector_type, selector_value, value):
+        field = self.browser.find_element(selector_type, selector_value)
+        field.send_keys(value)
+
+    def click_element(self, selector_type, selector_value):
+        element = self.browser.find_element(selector_type, selector_value)
+        element.click()
 
 
 

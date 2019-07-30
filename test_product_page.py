@@ -1,6 +1,9 @@
 from .pages.product_page import ProductPage
 from .pages.cart_page import CartPage
+from .pages.login_page import LoginPage
 import pytest
+import random
+from time import time
 
 
 link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer0"
@@ -51,4 +54,33 @@ def test_guest_cant_see_product_in_cart_opened_from_product_page(browser):
     cart_page.text_that_cart_is_empty_present()
     cart_page.cart_is_empty()
     
+
+class TestUserAddToCartFromProductPage:
+   
+    @pytest.fixture(scope="function", autouse=True)
+    def setup(self, browser):
+        link = "http://selenium1py.pythonanywhere.com/en-gb/accounts/login/"
+        email = str(time()) + "@fakemail.org"
+        password = str(random.randint(100000000, 200000000))
+        self.login_page = LoginPage(browser, link)
+        self.login_page.open()
+        self.login_page.register_new_user(email, password)
+        self.login_page.should_be_authorized_user()
+
+    def test_user_cant_see_success_message(self, browser):
+        self.product_page = ProductPage(browser, link)
+        self.product_page.open()
+        self.product_page.should_nod_be_success_message()
+
+    def test_user_can_add_product_to_cart(self, browser):
+        self.product_page = ProductPage(browser, link)
+        self.product_page.open()
+        self.product_page.add_to_cart()
+        self.product_page.check_product_description_in_notice()
+        self.product_page.check_product_price_in_notice()
+
+
+
+
+
 

@@ -27,3 +27,11 @@ class LoginPage(BasePage):
         assert self.is_element_present(*LoginPageLocators.REG_PSWD_FIELD), "Password field is not presented on the login page"
         assert self.is_element_present(*LoginPageLocators.CONFIRM_PSWD_FIELD), "Password confirm field is not presented on the login page"
         assert self.is_element_present(*LoginPageLocators.REG_BTN), "Register button is not presented on the login page"
+
+    def register_new_user(self, email, password):
+        self.should_be_register_form()
+        self.fill_the_field(*LoginPageLocators.REG_EMAIL_FIELD, email)
+        self.fill_the_field(*LoginPageLocators.REG_PSWD_FIELD, password)
+        self.fill_the_field(*LoginPageLocators.CONFIRM_PSWD_FIELD, password)
+        self.click_element(*LoginPageLocators.REG_BTN)
+        
